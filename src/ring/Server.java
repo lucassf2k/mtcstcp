@@ -6,14 +6,14 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.Objects;
 
-public class ServerHandler implements Runnable {
+public class Server implements Runnable {
   private final Socket clientSocket;
-  private final ClientHandler nextClient;
+  private final Client nextClient;
   private final String processName;
   private static ObjectOutputStream output;
   private static ObjectInputStream input;
 
-  public ServerHandler(final Socket clientSocket, final String name, final ClientHandler nextClient) {
+  public Server(final Socket clientSocket, final String name, final Client nextClient) {
     this.clientSocket = Objects.requireNonNull(clientSocket, "O clientSocket não pode ser nulo.");
     this.processName = Objects.requireNonNull(name, "O nome do processo não pode ser nulo.");
     this.nextClient = Objects.requireNonNull(nextClient, "O nome do processo não pode ser nulo.");
@@ -50,7 +50,7 @@ public class ServerHandler implements Runnable {
         }
         if (message.getType().equalsIgnoreCase("b")) {
           System.out.println("mensagem recebida de broadcast " + message.getContent());
-          if (message.getSender() != ClientHandler.PORT) {
+          if (message.getSender() != Client.PORT) {
             System.out.println("encaminhando mensagem para " + port);
             nextClient.sendMessage(message);
           }

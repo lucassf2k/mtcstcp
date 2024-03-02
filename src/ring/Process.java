@@ -29,12 +29,12 @@ public class Process {
       System.out.println("aguardando os outros processos...");
       scan.nextLine();
       final var clientSocket = new Socket(this.ip, this.nextClientPort);
-      final var client = new ClientHandler(clientSocket, this.name);
+      final var client = new Client(clientSocket, this.name);
       final var tClient = new Thread(client);
       tClient.start();
 
       final var clientConnectedInServer = serverSocket.accept();
-      final var server = new ServerHandler(clientConnectedInServer, this.name, client);
+      final var server = new Server(clientConnectedInServer, this.name, client);
       final var tServer = new Thread(server);
       tServer.start();
     } catch (IOException e) {
@@ -46,6 +46,6 @@ public class Process {
     // new Process("P1", "127.0.0.1", 56004, 56001);
     // new Process("P2", "127.0.0.1", 56001, 56002);
     // new Process("P3", "127.0.0.1", 56002, 56003);
-    new Process("P4", "127.0.0.1", 56003, 56004);
+    // new Process("P4", "127.0.0.1", 56003, 56004);
   }
 }

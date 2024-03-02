@@ -6,14 +6,14 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class ClientHandler implements Runnable {
+public class Client implements Runnable {
   private final Socket client;
   private final String processName;
   private ObjectInputStream input;
   private ObjectOutputStream output;
   public static int PORT;
 
-  public ClientHandler(final Socket client, final String name) {
+  public Client(final Socket client, final String name) {
     this.client = client;
     this.processName = name;
   }
@@ -22,7 +22,7 @@ public class ClientHandler implements Runnable {
   @SuppressWarnings("resource")
   public void run() {
     final var scan = new Scanner(System.in);
-    ClientHandler.PORT = client.getPort();
+    Client.PORT = client.getPort();
     final var port = client.getPort();
     System.out.println("o cliente " + processName + " conectou ao servidor");
     try {
