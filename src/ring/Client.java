@@ -6,6 +6,8 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.Scanner;
 
+import shared.Message;
+
 public class Client implements Runnable {
   private final Socket client;
   private final String processName;
@@ -26,10 +28,10 @@ public class Client implements Runnable {
     final var port = client.getPort();
     System.out.println("o cliente " + processName + " conectou ao servidor");
     try {
+      output = new ObjectOutputStream(this.client.getOutputStream());
+      input = new ObjectInputStream(this.client.getInputStream());
       boolean hasConnection = Boolean.TRUE;
       while (hasConnection) {
-        output = new ObjectOutputStream(this.client.getOutputStream());
-        input = new ObjectInputStream(this.client.getInputStream());
         System.out.println("Digite sua mensagem: ");
         final var rawMessage = scan.nextLine();
         final var formattedMessage = this.formatMessage(rawMessage);

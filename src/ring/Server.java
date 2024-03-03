@@ -6,6 +6,8 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.Objects;
 
+import shared.Message;
+
 public class Server implements Runnable {
   private final Socket clientSocket;
   private final Client nextClient;
@@ -24,12 +26,11 @@ public class Server implements Runnable {
     final var port = clientSocket.getLocalPort();
     System.out.println("iniciando servidor " + port);
     try {
+      input = new ObjectInputStream(this.clientSocket.getInputStream());
+      output = new ObjectOutputStream(this.clientSocket.getOutputStream());
       boolean hasConnection = Boolean.TRUE;
-      Message message;
       while (hasConnection) {
-        input = new ObjectInputStream(this.clientSocket.getInputStream());
-        output = new ObjectOutputStream(this.clientSocket.getOutputStream());
-        message = (Message) input.readObject();
+        final var message = (Message) input.readObject();
         // para finalizar o servidor
         if (message.getContent().equalsIgnoreCase("fim")) {
           hasConnection = Boolean.FALSE;
