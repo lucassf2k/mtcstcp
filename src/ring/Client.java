@@ -9,8 +9,8 @@ import java.util.Scanner;
 public class Client implements Runnable {
   private final Socket client;
   private final String processName;
-  private ObjectInputStream input;
-  private ObjectOutputStream output;
+  private static ObjectInputStream input;
+  private static ObjectOutputStream output;
   public static int PORT;
 
   public Client(final Socket client, final String name) {
@@ -61,13 +61,11 @@ public class Client implements Runnable {
         System.out.println(message.toString());
         if (messageContent.equalsIgnoreCase("fim")) {
           System.out.println("encerrando cliente de " + port);
-          output.writeObject(message);
-          output.flush();
+          this.sendMessage(message);
           hasConnection = Boolean.FALSE;
         } else {
           System.out.println("enviando ao servidor de " + (56001 + (port % 4)));
-          output.writeObject(message);
-          output.flush();
+          this.sendMessage(message);
         }
       }
       input.close();
@@ -80,8 +78,8 @@ public class Client implements Runnable {
 
   public void sendMessage(final Message message) {
     try {
-      this.output.writeObject(message);
-      this.output.flush();
+      Client.output.writeObject(message);
+      Client.output.flush();
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
