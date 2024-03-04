@@ -34,7 +34,7 @@ public class Process {
 
       while (true) {
         final var clientConnectedInServer = serverSocket.accept();
-        final var server = new Server(clientConnectedInServer, this.name, this.currentPort);
+        final var server = new Server(clientConnectedInServer, this.name);
         final var tServer = new Thread(server);
         tServer.start();
       }
@@ -47,6 +47,6 @@ public class Process {
     // new Process("P1", "127.0.0.1", 56001, 56001);
     // new Process("P2", "127.0.0.1", 56002, 56001);
     // new Process("P3", "127.0.0.1", 56003, 56001);
-    // new Process("P4", "127.0.0.1", 56004, 56001);
+    new Process("P4", "127.0.0.1", 56004, 56001);
   }
 }
