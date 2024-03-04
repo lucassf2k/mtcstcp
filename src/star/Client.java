@@ -25,7 +25,7 @@ public class Client implements Runnable {
       printer = new PrintStream(client.getOutputStream());
       boolean hasConnection = Boolean.TRUE;
       while (hasConnection) {
-        System.out.println("Digite sua mensagem: ");
+        System.out.println("exemplos:\nOlá -u=p3 | olá a todos -b\nDigite sua mensagem: ");
         final var rawMessage = scan.nextLine();
         final var formattedMessage = this.formatMessage(rawMessage);
         final var messageContent = formattedMessage[0];
