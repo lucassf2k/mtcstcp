@@ -41,11 +41,4 @@ public class Process {
       throw new RuntimeException(e);
     }
   }
-
-  public static void main(String[] args) {
-    // new Process("P1", "127.0.0.1", 56004, 56001);
-    // new Process("P2", "127.0.0.1", 56001, 56002);
-    // new Process("P3", "127.0.0.1", 56002, 56003);
-    // new Process("P4", "127.0.0.1", 56003, 56004);
-  }
 }
