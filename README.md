@@ -1,18 +1,17 @@
 ## Getting Started
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Implementation of star and ring topology using 4 processes where each process has a thread for a client socket and a thread for a server socket.
+
+some examples of messages:
+hello -u=p3, where hello is the content of the message; -u means it is unicast and p3 is the recipient
+hello everyone -b, where hello everyone is the content of the message and -b means it is broadcast
+
+Note: the ports used internally are 56001 to 56004
 
 ## Folder Structure
 
 The workspace contains two folders by default, where:
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
-
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
-
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+- `ring`: the directory with the ring topology files
+- `star`: the directory with the star topology files
+- `shared`: files shared between the two topologies
